@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from ticketing.models import Ticket, TicketStatus  # Adjust import as needed
+from ticketing.models.ticket import Ticket, TicketStatus  # Adjust import as needed
 
 
 class TestTicket(unittest.TestCase):

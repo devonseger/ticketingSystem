@@ -41,7 +41,7 @@ class Ticket:
         return {
             "title": self.title,
             "description": self.description,
-            "status": self.status,
+            "status": self.status.value,  # Store as int for serialization
             "created_at": self.created_at,
             "assigned_to": self.assigned_to,
             "priority": self.priority
