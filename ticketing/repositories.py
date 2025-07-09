@@ -21,17 +21,20 @@ class TicketRepository:
             with open(TICKETS_DB, 'r') as file:
                 data = json.load(file)
                 for ticket_data in data:
-                    ticket_obj = ticket.Ticket(
-                        ticket_id=ticket_data['ticket_id'],
-                        title=ticket_data['title'],
-                        description=ticket_data['description'],
-                        status=ticket.TicketStatus(ticket_data['status']),
-                        created_at=ticket_data['created_at'],
-                        updated_at=ticket_data['updated_at'],
-                        assigned_to=ticket_data['assigned_to'],
-                        priority=ticket_data['priority']
-                    )
-                    self.tickets[ticket_obj.ticket_id] = ticket_obj
+                    try:
+                        ticket_obj = ticket.Ticket(
+                            ticket_id=ticket_data['ticket_id'],
+                            title=ticket_data['title'],
+                            description=ticket_data['description'],
+                            status=ticket.TicketStatus(ticket_data['status']),
+                            created_at=ticket_data['created_at'],
+                            updated_at=ticket_data['updated_at'],
+                            assigned_to=ticket_data['assigned_to'],
+                            priority=ticket_data['priority']
+                        )
+                        self.tickets[ticket_obj.ticket_id] = ticket_obj
+                    except KeyError as e:
+                        print(f"Error loading ticket data: Missing key {e} in {ticket_data}")
         else:
             print("No existing tickets found. Starting with an empty repository.")
             # Create the file if it doesn't exist
