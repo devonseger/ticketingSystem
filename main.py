@@ -24,12 +24,16 @@ def create_ticket():
     
     repo.add_ticket(ticket)
     print(f">> Ticket '{title}' created successfully.")
-    print(f"Ticket ID: {ticket.ticket_id}")
+    print(f">> Ticket data : {ticket.to_dict()}.")
 
 
 def view_ticket():
-    ticket_id = input("Please enter the Ticket ID.")
-    print(f">> Attempting to view ticket number {ticket_id}")
+    try:
+        ticket_id = int(input("Please enter the Ticket ID:\n"))
+    except ValueError:
+        print("Invalid input. Please enter a numeric Ticket ID.")
+        return
+
     ticket = repo.get_ticket(ticket_id)
     if ticket:
         print(f"Ticket ID: {ticket.ticket_id}")
@@ -37,9 +41,10 @@ def view_ticket():
         print(f"Description: {ticket.description}")
         print(f"Status: {ticket.status.name}")
         print(f"Created At: {ticket.created_at}")
-        print(f"Updated At: {ticket.updated_at}")
         print(f"Assigned To: {ticket.assigned_to}")
         print(f"Priority: {ticket.priority}")
+    else:
+        print(f">> Ticket with ID {ticket_id} not found.")
 
 
 def view_all_tickets():
