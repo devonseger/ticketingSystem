@@ -39,10 +39,12 @@ class Ticket:
 
     def to_dict(self):
         return {
+            "ticket_id": self.ticket_id,
             "title": self.title,
             "description": self.description,
             "status": self.status.value,  # Store as int for serialization
             "created_at": self.created_at,
+            "updated_at": self.updated_at,
             "assigned_to": self.assigned_to,
             "priority": self.priority
         }
